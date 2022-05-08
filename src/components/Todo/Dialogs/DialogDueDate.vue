@@ -20,7 +20,7 @@
         Cancel
         </v-btn>
         <v-btn
-        @click="saveTask"
+        @click="saveRule"
         text
         color="primary"        
         >
@@ -32,25 +32,25 @@
 
 <script>
 export default {
-    props:['task'],
+    props:['rule'],
     data(){
         return{
             date: null
         }
     },
     methods:{
-        saveTask(){
+        saveRule(){
             let payload={
-                id: this.task.id,
+                id: this.rule.id,
                 dueDate: this.date
             }
-            this.$store.dispatch('updateTaskDueDate', payload)
+            this.$store.dispatch('updateRuleDueDate', payload)
             this.$emit('close')
         }
     },
     mounted(){
-        if (this.task.dueDate){
-            this.date = this.task.dueDate
+        if (this.rule.dueDate){
+            this.date = this.rule.dueDate
         }
     },
 }

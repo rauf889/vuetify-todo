@@ -1,6 +1,6 @@
 <template>
    <div
-    class="no-tasks"
+    class="no-rules"
   >
   <v-icon
   size="100"
@@ -8,7 +8,7 @@
   >
     mdi-check
   </v-icon>
-  <div class="text-h5 primary--text">No tasks</div> 
+  <div class="text-h5 primary--text">No rules</div> 
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .no-tasks{
+  .no-rules{
     position: absolute;
     left: 50%;
     top:50%;

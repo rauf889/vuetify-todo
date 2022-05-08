@@ -32,17 +32,17 @@
     <dialog-edit 
         v-if="dialogs.edit" 
         @close="dialogs.edit =false"
-        :task="task"
+        :rule="rule"
     />
     <dialog-due-date 
         v-if="dialogs.dueDate" 
         @close="dialogs.dueDate =false"
-        :task="task"
+        :rule="rule"
     />
     <dialog-delete 
         v-if="dialogs.delete" 
         @close="dialogs.delete =false"
-        :task="task"
+        :rule="rule"
     />
 </div>
   
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-    props: ['task'],
+    props: ['rule'],
     data: () => ({
     dialogs:{
         edit: false,

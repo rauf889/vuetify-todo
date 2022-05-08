@@ -6,13 +6,13 @@
     >      
       <v-card>
         <v-card-title class="text-h5">
-          Edit Task
+          Edit Rule
         </v-card-title>
         <v-card-text>
-            Edit the title of this task:
+            Edit the title of this rule:
             <v-text-field  
-            v-model="taskTitle"
-            @keyup.enter="saveTask"
+            v-model="ruleTitle"
+            @keyup.enter="saveRule"
             />
         </v-card-text>
         <v-card-actions>
@@ -25,8 +25,8 @@
             Cansel
           </v-btn>
           <v-btn
-            @click="saveTask"
-            :disabled="taskTitleInvalid"
+            @click="saveRule"
+            :disabled="ruleTitleInvalid"
             color="purple darken-2"
             text            
           >
@@ -39,32 +39,32 @@
 
 <script>
 export default {
-    props: ['task'],
+    props: ['rule'],
     data(){
         return{
-            taskTitle: null
+            ruleTitle: null
         }
     },    
     computed:{
-        taskTitleInvalid(){
-            return !this.taskTitle || this.taskTitle === this.task.title
+        ruleTitleInvalid(){
+            return !this.ruleTitle || this.ruleTitle === this.rule.title
         }
     },
     methods:{
-        saveTask(){
-            if (!this.taskTitleInvalid){
+        saveRule(){
+            if (!this.ruleTitleInvalid){
             let payload={
-                id:this.task.id,
-                title:this.taskTitle
+                id:this.rule.id,
+                title:this.ruleTitle
             }
-            this.$store.dispatch('updateTaskTitle', payload)
+            this.$store.dispatch('updateRuleTitle', payload)
             this.$emit('close')
             this.$vuetify.goTo(0, { duration: 0})
         }
         },
     },
     mounted(){
-        this.taskTitle= this.task.title
+        this.ruleTitle= this.rule.title
     },
 }
 </script>

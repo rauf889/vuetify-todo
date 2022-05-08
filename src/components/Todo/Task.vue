@@ -1,36 +1,36 @@
 <template>
   <div>
         <v-list-item 
-            @click="$store.dispatch('doneTask', task.id)"
-            :class="{ 'blue lighten-5' : task.done}"
+            @click="$store.dispatch('doneRule', rule.id)"
+            :class="{ 'blue lighten-5' : rule.done}"
             class="white"
             :ripple="false"    
             >
             <template v-slot:default>
                 <v-list-item-action>
                     <v-checkbox
-                        :input-value="task.done"
+                        :input-value="rule.done"
                         color="primary"
                     ></v-checkbox>
                 </v-list-item-action>
 
                 <v-list-item-content>
                     <v-list-item-title
-                    :class="{'text-decoration-line-through' : task.done}"
+                    :class="{'text-decoration-line-through' : rule.done}"
                     >
-                        {{ task.title }}
+                        {{ rule.title }}
                     </v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action v-if="task.dueDate">
+                <v-list-item-action v-if="rule.dueDate">
                     <v-list-item-action-text >
                         <v-icon small>mdi-calendar</v-icon>
-                        {{ task.dueDate | niceDate }}
+                        {{ rule.dueDate | niceDate }}
                     </v-list-item-action-text>
                 </v-list-item-action>
                     
                 <v-list-item-action>
-                    <task-menu :task="task" />
+                    <rule-menu :rule="rule" />
                 </v-list-item-action>
 
                 <v-list-item-action
@@ -56,14 +56,14 @@
 import {format} from 'date-fns'
 
 export default {
-    props: ['task'],
+    props: ['rule'],
     filters:{
         niceDate(value){
             return format(new Date(value), 'MMM d')
         }
     },
     components:{
-        'task-menu': require('@/components/Todo/TaskMenu.vue').default,
+        'rule-menu': require('@/components/Todo/TaskMenu.vue').default,
     },
 }
 </script>

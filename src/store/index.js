@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state: {
     appTitle: process.env.VUE_APP_TITLE,
     search: null,
-    tasks:[
+    rules:[
       // {
       //   id:1,
       //   title: 'Wake up',
@@ -42,26 +42,26 @@ export default new Vuex.Store({
     setSearch(state, value){
       state.search=value
     },
-    addTask(state, newTask){      
-      state.tasks.push(newTask)
+    addRule(state, newRule){      
+      state.rules.push(newRule)
     },
-    doneTask(state, id){
-      let task= state.tasks.filter(task => task.id === id)[0]
-      task.done = !task.done
+    doneRule(state, id){
+      let rule= state.rules.filter(rule => rule.id === id)[0]
+      rule.done = !rule.done
     },
-    deleteTask(state, id){
-      state.tasks= state.tasks.filter(task => task.id !== id)
+    deleteRule(state, id){
+      state.rules= state.rules.filter(rule => rule.id !== id)
     },
-    updateTaskTitle(state, payload){
-      let task = state.tasks.filter(task => task.id === payload.id)[0]
-      task.title = payload.title
+    updateRuleTitle(state, payload){
+      let rule = state.rules.filter(rule => rule.id === payload.id)[0]
+      rule.title = payload.title
     },
-    updateTaskDueDate(state, payload){
-      let task = state.tasks.filter(task => task.id === payload.id)[0]
-      task.dueDate = payload.dueDate
+    updateRuleDueDate(state, payload){
+      let rule = state.rules.filter(rule => rule.id === payload.id)[0]
+      rule.dueDate = payload.dueDate
     },
-    setTasks(state, tasks){
-      state.tasks= tasks
+    setRules(state, rules){
+      state.rules= rules
     },
     showSnackbar(state, text){
       let timeout = 0
@@ -82,68 +82,68 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    addTask({commit}, newTaskTitle){
-      let newTask={
+    addRule({commit}, newRuleTitle){
+      let newRule={
         id: Date.now(),
-        title: newTaskTitle,
+        title: newRuleTitle,
         done:false,
         dueDate: null
       }
-      db.collection('tasks').add(newTask).then(()=>{
-        commit('addTask', newTask)
-        commit('showSnackbar', 'Task added!')
+      db.collection('rules').add(newRule).then(()=>{
+        commit('addRule', newRule)
+        commit('showSnackbar', 'Rule added!')
       })      
     },
-    doneTask({state, commit}, id){
-      let task= state.tasks.filter(task => task.id === id)[0]
-      db.collection('tasks').doc({ id: id}).update({
-        done: !task.done
+    doneRule({state, commit}, id){
+      let rule= state.rules.filter(rule => rule.id === id)[0]
+      db.collection('rules').doc({ id: id}).update({
+        done: !rule.done
       }).then(()=>{
-        commit('doneTask', id)
+        commit('doneRule', id)
       })
     },
-    deleteTask({commit}, id){
-      db.collection('tasks').doc({ id: id }).delete().then(()=>{
-        commit('deleteTask', id)
-        commit('showSnackbar', 'Task deleted!')
+    deleteRule({commit}, id){
+      db.collection('rules').doc({ id: id }).delete().then(()=>{
+        commit('deleteRule', id)
+        commit('showSnackbar', 'Rule deleted!')
       })
       
     },
-    updateTaskTitle({commit}, payload){
-      db.collection('tasks').doc({ id: payload.id }).update({
+    updateRuleTitle({commit}, payload){
+      db.collection('rules').doc({ id: payload.id }).update({
         title: payload.title
       }).then(() => {
-        commit('updateTaskTitle', payload)
-        commit('showSnackbar', 'Task updated!')
+        commit('updateRuleTitle', payload)
+        commit('showSnackbar', 'Rule updated!')
       })      
     },
-    updateTaskDueDate({commit}, payload){
-      db.collection('tasks').doc({ id: payload.id }).update({
+    updateRuleDueDate({commit}, payload){
+      db.collection('rules').doc({ id: payload.id }).update({
         dueDate: payload.dueDate
       }).then(() => {
-        commit('updateTaskDueDate', payload)
+        commit('updateRuleDueDate', payload)
         commit('showSnackbar', 'DueDate updated!')
       })      
     },
-    setTasks({commit}, tasks){
-      db.collection('tasks').set(tasks)
-        commit('setTasks', tasks)
+    setRules({commit}, rules){
+      db.collection('rules').set(rules)
+        commit('setRules', rules)
     },
-    getTasks({commit}){
-      db.collection('tasks').get().then(tasks=>{
-        commit('setTasks', tasks)
+    getRules({commit}){
+      db.collection('rules').get().then(rules=>{
+        commit('setRules', rules)
       })
     },
       
     
   },
   getters:{
-    tasksFiltered(state){
+    rulesFiltered(state){
       if(!state.search){
-        return state.tasks
+        return state.rules
       }
-      return state.tasks.filter(task =>
-        task.title.toLowerCase().includes(state.search.toLowerCase()))
+      return state.rules.filter(rule =>
+        rule.title.toLowerCase().includes(state.search.toLowerCase()))
     
     }
   }

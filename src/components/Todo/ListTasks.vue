@@ -4,13 +4,13 @@
       flat
     >
     <draggable 
-    v-model="tasks"
+    v-model="rules"
     handle=".handle"
     >
-    <task 
-    v-for="task in tasks"
-    :key="task.id"
-    :task="task"
+    <rule 
+    v-for="rule in rules"
+    :key="rule.id"
+    :rule="rule"
     />    
     </draggable>
     </v-list>
@@ -21,17 +21,17 @@ import draggable from 'vuedraggable'
 
 export default {
     computed:{        
-        tasks: {
+        rules: {
             get() {
-                return this.$store.getters.tasksFiltered
+                return this.$store.getters.rulesFiltered
             },
             set(value) {
-                this.$store.dispatch('setTasks', value)
+                this.$store.dispatch('setRules', value)
             }
         }
     },
     components:{
-        'task' : require('@/components/Todo/Task.vue').default,
+        'rule' : require('@/components/Todo/Task.vue').default,
         draggable,
     },
 }

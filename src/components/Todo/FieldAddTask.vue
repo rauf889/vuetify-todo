@@ -1,17 +1,17 @@
 <template>
   <v-text-field
-    v-model="newTaskTitle"
-    @keyup.enter="addTask"
-    class="field-add-task pa-3"
+    v-model="newRuleTitle"
+    @keyup.enter="addRule"
+    class="field-add-rule pa-3"
     outlined
-    placeholder="Add Task"
+    placeholder="Add Rule"
     hide-details
     clearable
   >
   <template v-slot:append>
     <v-icon
-      @click="addTask"
-      :disabled="!newTaskTitleInvalid"
+      @click="addRule"
+      :disabled="!newRuleTitleInvalid"
     >
       mdi-plus
     </v-icon>
@@ -24,19 +24,19 @@
 export default {
     data(){
       return {
-        newTaskTitle : ''
+        newRuleTitle : ''
       }
     },
     computed:{
-      newTaskTitleInvalid(){
-        return !this.newTaskTitle
+      newRuleTitleInvalid(){
+        return !this.newRuleTitle
       }
     },
     methods:{
-      addTask(){
-        if(!this.newTaskTitleInvalid){
-         this.$store.dispatch('addTask', this.newTaskTitle)
-         this.newTaskTitle= '' 
+      addRule(){
+        if(!this.newRuleTitleInvalid){
+         this.$store.dispatch('addRule', this.newRuleTitle)
+         this.newRuleTitle= '' 
         }
         
     },
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="sass">
-.field-add-task.v-input--is-focused
+.field-add-rule.v-input--is-focused
   .v-input__slot
     background: rgba(31, 94, 129, 0.5) 
 </style>

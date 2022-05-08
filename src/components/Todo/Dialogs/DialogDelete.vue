@@ -6,7 +6,7 @@
     >      
       <v-card>
         <v-card-title class="text-h5">
-          Delete Task?
+          Delete Rule?
         </v-card-title>
         <v-card-text>Are you sure you want it?</v-card-text>
         <v-card-actions>
@@ -19,7 +19,7 @@
             No
           </v-btn>
           <v-btn
-            @click="$store.dispatch('deleteTask', task.id)"
+            @click="$store.dispatch('deleteRule', rule.id)"
             color="purple darken-2"
             text
             
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-    props: ['task']
+    props: ['rule']
 }
 </script>
 

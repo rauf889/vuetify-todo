@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app >
     <v-navigation-drawer 
     v-model="drawer"
     :mobile-breakpoint="768"
@@ -16,8 +16,8 @@
         alt="John D"
       >
       </v-avatar>
-      <div class="white--text text-subtitle-1 font-weight-bold">John D</div>
-      <div class="white--text text-subtitle-2">john__d</div>
+      <div class="white--text text-subtitle-1 font-weight-bold">Intruvision</div>
+      <div class="white--text text-subtitle-2">Intruvision</div>
       </v-img>
 
       <v-list
@@ -41,7 +41,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
+<v-app-bar
       app
       color="primary"
       dark
@@ -72,7 +72,8 @@
         <live-date-time />
       </v-row>
       <v-row v-if="$route.path === '/'">
-          <field-add-task />
+          <field-add-rule />
+          <!--  -->
       </v-row>
     </v-container>
 
@@ -87,27 +88,30 @@
 
 <script>
 import Snackbar from './components/Shared/Snackbar.vue'
-  export default {
+
+export default {
     data: () => ({
        drawer: true,
         items: [
-          { title: 'Todo', icon: 'mdi-format-list-checks', to :'/' },
-          { title: 'About', icon: 'mdi-help-box', to :'/about' },
+          { title: 'Rule Setters', icon: 'mdi-format-list-checks', to :'/' },
+          { title: 'Home', icon: 'mdi-home', to :'/about' },
         ],
        }),
        mounted(){
-         this.$store.dispatch('getTasks')
+         this.$store.dispatch('getRules')
        },
         components:{
         'search': require('@/components/Tools/Search.vue').default,
         'live-date-time': require('@/components/Tools/LiveDateTime.vue').default,
-        'field-add-task': require('@/components/Todo/FieldAddTask.vue').default,
+        'field-add-rule': require('@/components/Todo/FieldAddTask.vue').default,
+        // 
         'snackbar': require('@/components/Shared/Snackbar.vue').default,
+        // 'navbar': require('@/components/Navbar').default,
       },
 }
 </script>
 
-<style lang-"sass">
+<style>
   .header-container{
     max-width: none !important
   }
